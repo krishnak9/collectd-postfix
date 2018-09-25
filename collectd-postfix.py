@@ -58,7 +58,7 @@ def get_stats():
 
   if VERBOSE_LOGGING:
     logger('info', metric_counts)
-    
+  print(metric_counts) 
   return metric_counts
 
 def process_mailqueue():
