@@ -2,7 +2,6 @@
 # Author: Wylie Hobbs - 2017
 #
 
-import collectd
 import socket
 import datetime
 import re
@@ -146,21 +145,16 @@ def read_callback():
 
   for key,value in info.items():
     key_name = key
-    val = collectd.Values(plugin=NAME, type='gauge')
-    val.type_instance = key_name
-    val.values = [ value ]
-    val.dispatch()
 
 def logger(t, msg):
     if t == 'err':
-      collectd.error('%s: %s' % (NAME, msg))
+      print('%s: %s' % (NAME, msg))
     elif t == 'warn':
-      collectd.warning('%s: %s' % (NAME, msg))
+      print('%s: %s' % (NAME, msg))
     elif t == 'verb':
       if VERBOSE_LOGGING:
-        collectd.info('%s: %s' % (NAME, msg))
+        print('%s: %s' % (NAME, msg))
     else:
-      collectd.notice('%s: %s' % (NAME, msg))
+      print('%s: %s' % (NAME, msg))
 
-collectd.register_config(configure_callback)
-collectd.register_read(read_callback)
+read_callback()
